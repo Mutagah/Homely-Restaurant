@@ -1,0 +1,16 @@
+current directory: /home/moringa/phase4/homely_restaurant/vendor/bundle/ruby/2.7.0/gems/debug-1.7.1/ext/debug
+/home/moringa/.rbenv/versions/2.7.4/bin/ruby -I /home/moringa/.rbenv/versions/2.7.4/lib/ruby/2.7.0 -r ./siteconf20230326-116648-o8fxkx.rb extconf.rb
+creating Makefile
+
+current directory: /home/moringa/phase4/homely_restaurant/vendor/bundle/ruby/2.7.0/gems/debug-1.7.1/ext/debug
+make "DESTDIR=" clean
+
+current directory: /home/moringa/phase4/homely_restaurant/vendor/bundle/ruby/2.7.0/gems/debug-1.7.1/ext/debug
+make "DESTDIR="
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/moringa/phase4/homely_restaurant/vendor/bundle/ruby/2.7.0/gems/debug-1.7.1/ext/debug
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20230326-116648-15kdkky/debug
