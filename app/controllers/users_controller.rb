@@ -1,23 +1,49 @@
-class UserController < ApplicationController
-rescue from::ActiveRecord: :RecordInvalid, with: :render_uprocessable_entity_response
-rescue from::ActiveRecord: :RecordNotFound, with: :render_not_found_response
-   wrap_parameters format: []
-
-    user = User.create!(user_params)
-    session[:user_id]= user.id
-    render json: user, status: :created
-end
-def show
-    user=User.find_by(id: session[:user_id])
-render json: user,status: :ok
-
-   private 
-   def user_params
-    params.permit(:username, :password_digest, :password_confirmation, :image_url)
+class UsersController < ApplicationController
+   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+ 
+   def index
+     users = User.all
+     render json: users
    end
-def render_uprocessable_entity_response(invalid)
-   render json:{errors: invalid.record.errors.full_messages}, status: :unproccessable_entity
-end
-def render_not_found_response
-   render json :{errors:["not found"]}, status: :not_found
-end
+ 
+   def show
+     user = User.find(params[:id])
+     render json: user
+   end
+ 
+   def create
+     user = User.create!(user_params)
+     render json: user, status: :created
+   end
+ 
+   def update
+     user = find_user
+     user.update!(user_params)
+     render json: user, status: :accepted
+   end
+ 
+   def destroy
+     user = find_user
+     user.destroy
+     head :no_content
+   end
+ 
+   private
+ 
+   def user_params
+     params.require(:user).permit(:name, :email, :password)
+   end
+ 
+   def render_unprocessable_entity_response(exception)
+     render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
+   end
+ 
+   def render_not_found_response
+     render json: { errors: ["User not found"] }, status: :not_found
+   end
+ 
+   def find_user
+     User.find(params[:id])
+   end
+ end
