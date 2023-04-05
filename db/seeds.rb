@@ -14,14 +14,14 @@ Restaurant.destroy_all
 Review.destroy_all
 Food.destroy_all
 
-User.create(username: Faker::Name.middle_name,
-password_digest: "123",
-password_confirmation: "123",
+User.create!(username: Faker::Name.middle_name,
+password: "123456789",
+password_confirmation: "123456789",
 image_url: user_image_urls.sample)
 
-User.create(username: Faker::Name.middle_name,
-password_digest: "123",
-password_confirmation: "123",
+User.create!(username: Faker::Name.middle_name,
+password: "123456789",
+password_confirmation: "123456789",
 image_url: user_image_urls.sample)
 
 puts "🍟🍟 Seeding!!"
